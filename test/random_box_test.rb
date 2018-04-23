@@ -15,6 +15,7 @@ class RandomBoxTest < Minitest::Test
 
   def test_argument_type_error
     assert_raises(TypeError){@box.add("test")}
+    assert_raises(TypeError){@box.add({a: "a"})}
   end
 
   def test_draw_error
