@@ -11,7 +11,7 @@ module RandomBox
     end
 
     def draw(num = 1, back: false)
-      raise "There is no contents" if @contents.empty?
+      raise "There is no contents in this box" if @contents.empty?
       if back
         draw_items = num.times.map{@contents.sample}
       else
@@ -55,11 +55,14 @@ module RandomBox
 
     def update_contents_data
       total_size = @contents.size
-      contents_count = @contents.inject(Hash.new(0)) { |count, item| count[item] += 1; count}
-      @contents_data = contents_count.sort_by{|_, num| -num}.to_h.transform_values{ |num|
-        percent = num.fdiv(total_size) * 100
-        {number: num, percent: percent.round(4)}
-      }
+      @contents_data = @contents
+        .inject(Hash.new(0)) { |count, item| count[item] += 1; count}
+        .sort_by{|_, num| -num}
+        .to_h
+        .transform_values{ |num|
+          percent = num.fdiv(total_size) * 100
+          {number: num, percent: percent.round(4)}
+        }
     end
 
     def justify_row(row)
