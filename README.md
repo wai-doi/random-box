@@ -28,7 +28,7 @@ You can give Array and Range and Hash seed for Box#new argument.
 ```ruby
 require 'random_box'
 
-# seed = [a:, b:, a:, z:]
+# seed = [:a, :b, :a, :z]
 # seed = 1..100
 seed = {winning: 5, losing: 20}
 
